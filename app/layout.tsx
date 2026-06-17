@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { profile } from "@/content";
+import InteractiveBackground from "./components/InteractiveBackground";
 import "./globals.css";
 
 const geist = Geist({
@@ -25,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} antialiased`}>{children}</body>
+      <body className={`${geist.variable} antialiased`}>
+        <InteractiveBackground />
+        {children}
+      </body>
     </html>
   );
 }

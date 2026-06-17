@@ -20,7 +20,8 @@
       "Bash(git push *)",
       "Bash(brew install *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "WebFetch(domain:portfolio-two-mu-67f3jquis6.vercel.app)"
     ]
   }
 }

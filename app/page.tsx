@@ -7,6 +7,7 @@ import {
   education,
   certifications,
 } from "@/content";
+import Reveal from "./components/Reveal";
 
 export default function Home() {
   return (
@@ -14,13 +15,27 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Certifications />
-        <Education />
-        <Contact />
+        <Reveal>
+          <About />
+        </Reveal>
+        <Reveal>
+          <Experience />
+        </Reveal>
+        <Reveal>
+          <Projects />
+        </Reveal>
+        <Reveal>
+          <Skills />
+        </Reveal>
+        <Reveal>
+          <Certifications />
+        </Reveal>
+        <Reveal>
+          <Education />
+        </Reveal>
+        <Reveal>
+          <Contact />
+        </Reveal>
       </main>
       <Footer />
     </div>
@@ -39,9 +54,12 @@ function Nav() {
     ["Contact", "#contact"],
   ];
   return (
-    <header className="sticky top-0 z-10 -mx-6 border-b border-border bg-background/80 px-6 backdrop-blur">
+    <header className="sticky top-0 z-20 -mx-6 border-b border-border bg-background/70 px-6 backdrop-blur-md">
       <nav className="flex h-16 items-center justify-between">
-        <a href="#" className="font-semibold tracking-tight">
+        <a
+          href="#"
+          className="font-semibold tracking-tight transition-colors hover:text-accent"
+        >
           {profile.name}
         </a>
         <ul className="hidden gap-6 text-sm text-muted sm:flex">
@@ -65,24 +83,24 @@ function Hero() {
   return (
     <section className="py-20 sm:py-28">
       <p className="mb-3 text-sm font-medium text-accent">Hi, I'm</p>
-      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="gradient-text text-5xl font-bold tracking-tight sm:text-6xl">
         {profile.name}
       </h1>
-      <p className="mt-2 text-xl text-muted sm:text-2xl">{profile.role}</p>
+      <p className="mt-3 text-xl text-muted sm:text-2xl">{profile.role}</p>
       <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/80">
         {profile.tagline}
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <a
           href="#contact"
-          className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-accent/40"
         >
           Get in touch
         </a>
         {profile.socials.resume && (
           <a
             href={profile.socials.resume}
-            className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-card"
+            className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:bg-card"
           >
             View resume
           </a>
@@ -116,7 +134,9 @@ function Hero() {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-8 text-2xl font-bold tracking-tight">{children}</h2>
+    <h2 className="mb-8 text-2xl font-bold tracking-tight">
+      <span className="gradient-text">{children}</span>
+    </h2>
   );
 }
 
@@ -160,7 +180,7 @@ function Experience() {
               <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/80">
                 {job.bullets.map((b, i) => (
                   <li key={i} className="flex gap-2">
-                    <span className="mt-2 size-1 shrink-0 rounded-full bg-muted" />
+                    <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -184,11 +204,11 @@ function Projects() {
         {projects.map((project) => (
           <article
             key={project.title}
-            className="flex flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-accent/50"
+            className="group flex flex-col rounded-xl border border-border bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10"
           >
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="text-lg font-semibold">{project.title}</h3>
-            </div>
+            <h3 className="text-lg font-semibold transition-colors group-hover:text-accent">
+              {project.title}
+            </h3>
             {project.period && (
               <p className="mt-1 text-xs text-muted">{project.period}</p>
             )}
@@ -250,7 +270,7 @@ function Skills() {
               {group.items.map((item) => (
                 <li
                   key={item}
-                  className="rounded-md border border-border bg-card px-3 py-1.5 text-sm"
+                  className="cursor-default rounded-md border border-border bg-card/80 px-3 py-1.5 text-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
                 >
                   {item}
                 </li>
@@ -328,7 +348,7 @@ function Contact() {
       </p>
       <a
         href={`mailto:${profile.email}`}
-        className="mt-6 inline-block rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        className="mt-6 inline-block rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-accent/40"
       >
         {profile.email}
       </a>
