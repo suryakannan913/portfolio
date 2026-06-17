@@ -238,10 +238,26 @@ body {
 
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-up {
+  transform: translateY(28px);
+}
+
+.reveal-left {
+  transform: translateX(-72px);
+}
+
+.reveal-right {
+  transform: translateX(72px);
+}
+
+.reveal-scale {
+  transform: scale(0.92);
 }
 
 .reveal-in {

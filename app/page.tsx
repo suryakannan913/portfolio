@@ -14,27 +14,27 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-3xl px-6">
       <Nav />
-      <main>
+      <main className="overflow-x-clip">
         <Hero />
-        <Reveal>
+        <Reveal direction="left">
           <About />
         </Reveal>
-        <Reveal>
+        <Reveal direction="right">
           <Experience />
         </Reveal>
-        <Reveal>
+        <Reveal direction="left">
           <Projects />
         </Reveal>
-        <Reveal>
+        <Reveal direction="right">
           <Skills />
         </Reveal>
-        <Reveal>
+        <Reveal direction="left">
           <Certifications />
         </Reveal>
-        <Reveal>
+        <Reveal direction="right">
           <Education />
         </Reveal>
-        <Reveal>
+        <Reveal direction="scale">
           <Contact />
         </Reveal>
       </main>
