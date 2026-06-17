@@ -86,7 +86,7 @@ export const experience: {
     location: "Pleasanton, CA", // TODO: VERIFY location (remote/hybrid?)
     bullets: [
       "Building an end-to-end analytics manager that gives stakeholders visibility into product usage, as part of a broader end-to-end instrumentation ecosystem.",
-      // TODO: add the tech stack + any measurable impact once you can share it.
+      "Developing the frontend with React, TypeScript, Vite, and Node.js.",
     ],
   },
   {
