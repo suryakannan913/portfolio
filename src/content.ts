@@ -132,20 +132,48 @@ export const education: {
   },
 ];
 
-export const certifications: { name: string; issuer: string; date: string }[] = [
+export const certifications: {
+  name: string;
+  issuer: string;
+  date: string;
+  // Short headline stat shown as a badge. Replace TODO ones with real numbers
+  // if you have them (exam score, hours, # of projects, etc.).
+  metric: string;
+  skills: string[];
+  highlights: string[];
+}[] = [
   {
     name: "Certified Professional",
     issuer: "Neo4j",
     date: "Mar 2026",
+    metric: "Professional-level exam", // TODO: add your exam score if you'd like (e.g. "92% exam score")
+    skills: ["Cypher", "Schema Design", "Property Graphs", "APOC", "Indexing"],
+    highlights: [
+      "Architected high-performance graph databases using advanced property graph models with optimized node labels, relationship types, and indexing strategies.",
+      "Engineered complex Cypher queries with subqueries, pattern comprehension, and list-processing functions to extract deep insights from highly interconnected datasets.",
+      "Configured database security and ACID-compliant transactions, leveraging the APOC library for advanced data procedures.",
+    ],
   },
   {
     name: "Introduction to Software Development",
     issuer: "Amazon",
     date: "Oct 2025",
+    metric: "Full-cycle SDLC",
+    skills: ["Python", "Java", "JavaScript", "CI/CD", "Automated Testing"],
+    highlights: [
+      "Managed the full software development life cycle — from requirements gathering through architecture design and automated testing.",
+      "Streamlined CI/CD pipelines with automated testing and version-control workflows to maintain high deployment standards.",
+    ],
   },
   {
     name: "IT Automation with Python",
     issuer: "Google",
     date: "Sep 2024",
+    metric: "6-course Professional Certificate",
+    skills: ["Python", "Bash", "Regex", "Git", "Configuration Mgmt"],
+    highlights: [
+      "Automated system administration by developing Python scripts to manage files and process log data.",
+      "Implemented configuration management to maintain consistent state across a fleet of virtual machines.",
+    ],
   },
 ];

@@ -68,46 +68,60 @@ body {
   --my: 30vh;
 }
 
-/* Grid that only lights up around the cursor */
+/* Grid that lights up around the cursor — now brighter + accent-tinted */
 .bg-fx-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 46px 46px;
-  opacity: 0.6;
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--accent) 45%, var(--border)) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--accent) 45%, var(--border)) 1px,
+      transparent 1px
+    );
+  background-size: 44px 44px;
+  opacity: 0.7;
   -webkit-mask-image: radial-gradient(
-    320px circle at var(--mx) var(--my),
+    400px circle at var(--mx) var(--my),
     #000 0%,
-    transparent 65%
+    transparent 70%
   );
   mask-image: radial-gradient(
-    320px circle at var(--mx) var(--my),
+    400px circle at var(--mx) var(--my),
     #000 0%,
-    transparent 65%
+    transparent 70%
   );
 }
 
-/* Accent spotlight that follows the cursor */
+/* Accent spotlight that follows the cursor — wide soft halo + bright core */
 .bg-fx-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    600px circle at var(--mx) var(--my),
-    color-mix(in srgb, var(--accent) 16%, transparent),
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      300px circle at var(--mx) var(--my),
+      color-mix(in srgb, var(--accent-2) 22%, transparent),
+      transparent 65%
+    ),
+    radial-gradient(
+      750px circle at var(--mx) var(--my),
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 72%
+    );
 }
 
 /* Slowly drifting color blobs */
 .bg-fx-blob {
   position: absolute;
-  width: 38rem;
-  height: 38rem;
+  width: 40rem;
+  height: 40rem;
   border-radius: 9999px;
   filter: blur(90px);
-  opacity: 0.22;
+  opacity: 0.3;
 }
 
 .bg-fx-blob-1 {
@@ -124,6 +138,16 @@ body {
   animation: drift-2 26s ease-in-out infinite;
 }
 
+.bg-fx-blob-3 {
+  top: 30%;
+  left: 45%;
+  width: 30rem;
+  height: 30rem;
+  background: color-mix(in srgb, var(--accent) 60%, var(--accent-2));
+  opacity: 0.18;
+  animation: drift-3 32s ease-in-out infinite;
+}
+
 @keyframes drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(6rem, 4rem) scale(1.1); }
@@ -132,6 +156,80 @@ body {
 @keyframes drift-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-5rem, -3rem) scale(1.05); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-7rem, 5rem) scale(1.12); }
+  66% { transform: translate(5rem, -6rem) scale(0.95); }
+}
+
+/* ----------------------------------------------------------------------- */
+/*  Spotlight cards (glow follows cursor inside the card)                   */
+/* ----------------------------------------------------------------------- */
+
+.sc-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    240px circle at var(--cx, 50%) var(--cy, 50%),
+    color-mix(in srgb, var(--accent) 26%, transparent),
+    transparent 60%
+  );
+}
+
+.group\/sc:hover .sc-glow {
+  opacity: 1;
+}
+
+/* Gradient ring that fades in on hover */
+.sc-border {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: linear-gradient(
+    130deg,
+    var(--accent),
+    var(--accent-2)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.group\/sc:hover .sc-border {
+  opacity: 1;
+}
+
+/* Glowy "bubble" pill hover */
+.pill {
+  cursor: default;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 8px 24px -8px color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 /* ----------------------------------------------------------------------- */

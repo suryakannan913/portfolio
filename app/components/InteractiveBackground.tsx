@@ -37,6 +37,7 @@ export default function InteractiveBackground() {
       <div className="bg-fx-grid" />
       <div className="bg-fx-blob bg-fx-blob-1" />
       <div className="bg-fx-blob bg-fx-blob-2" />
+      <div className="bg-fx-blob bg-fx-blob-3" />
       <div className="bg-fx-glow" />
     </div>
   );

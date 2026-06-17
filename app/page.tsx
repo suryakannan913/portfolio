@@ -8,6 +8,7 @@ import {
   certifications,
 } from "@/content";
 import Reveal from "./components/Reveal";
+import SpotlightCard from "./components/SpotlightCard";
 
 export default function Home() {
   return (
@@ -202,11 +203,11 @@ function Projects() {
       <SectionHeading>Projects</SectionHeading>
       <div className="grid gap-6 sm:grid-cols-2">
         {projects.map((project) => (
-          <article
+          <SpotlightCard
             key={project.title}
-            className="group flex flex-col rounded-xl border border-border bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10"
+            className="rounded-xl border border-border bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10"
           >
-            <h3 className="text-lg font-semibold transition-colors group-hover:text-accent">
+            <h3 className="text-lg font-semibold transition-colors group-hover/sc:text-accent">
               {project.title}
             </h3>
             {project.period && (
@@ -249,7 +250,7 @@ function Projects() {
                 )}
               </div>
             )}
-          </article>
+          </SpotlightCard>
         ))}
       </div>
     </section>
@@ -270,7 +271,7 @@ function Skills() {
               {group.items.map((item) => (
                 <li
                   key={item}
-                  className="cursor-default rounded-md border border-border bg-card/80 px-3 py-1.5 text-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                  className="pill rounded-md border border-border bg-card/80 px-3 py-1.5 text-sm backdrop-blur-sm"
                 >
                   {item}
                 </li>
@@ -287,20 +288,49 @@ function Certifications() {
   return (
     <section className="scroll-mt-20 border-t border-border py-16">
       <SectionHeading>Certifications</SectionHeading>
-      <ul className="space-y-3">
+      <div className="space-y-5">
         {certifications.map((cert) => (
-          <li
+          <SpotlightCard
             key={`${cert.issuer}-${cert.name}`}
-            className="flex items-baseline justify-between gap-4"
+            className="rounded-xl border border-border bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/10"
           >
-            <span>
-              <span className="font-medium">{cert.issuer}</span>
-              <span className="text-foreground/80"> — {cert.name}</span>
-            </span>
-            <span className="shrink-0 text-sm text-muted">{cert.date}</span>
-          </li>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+              <h3 className="text-lg font-semibold transition-colors group-hover/sc:text-accent">
+                <span className="text-accent">{cert.issuer}</span>{" "}
+                <span className="font-normal text-foreground/60">·</span>{" "}
+                {cert.name}
+              </h3>
+              <span className="text-sm text-muted">{cert.date}</span>
+            </div>
+
+            <div className="mt-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+                ★ {cert.metric}
+              </span>
+            </div>
+
+            <ul className="mt-4 space-y-1.5 text-sm leading-relaxed text-foreground/80">
+              {cert.highlights.map((h, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" />
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+
+            <ul className="mt-4 flex flex-wrap gap-1.5">
+              {cert.skills.map((s) => (
+                <li
+                  key={s}
+                  className="rounded bg-background px-2 py-0.5 text-xs text-muted"
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </SpotlightCard>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
