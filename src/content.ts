@@ -11,7 +11,7 @@ export const profile = {
   name: "Surya Kannan",
   role: "Software Engineer",
   tagline:
-    "Full-stack software engineer and Data Science student at UC Berkeley. I build AI-powered applications — from multi-agent systems and RAG pipelines to full-stack web apps. Currently a Global Technology Intern at Albertsons.",
+    "Full-stack software engineer and Data Science student at UC Berkeley. I build AI-powered applications — from RAG pipelines and knowledge graphs to full-stack web apps. Currently a Global Technology Intern at Albertsons.",
   location: "San Francisco Bay Area, CA",
   email: "suryakannan913@berkeley.edu",
   socials: {
@@ -23,7 +23,7 @@ export const profile = {
 };
 
 export const about = [
-  "I'm a Data Science student at UC Berkeley and a full-stack engineer who loves building practical AI systems. My work spans retrieval-augmented generation, knowledge graphs, and multi-agent platforms — always with an eye toward shipping something that actually works.",
+  "I'm a Data Science student at UC Berkeley and a full-stack engineer who loves building practical AI systems. My work spans retrieval-augmented generation, knowledge graphs, and data-intensive applications — always with an eye toward shipping something that actually works.",
   "I'm currently a Global Technology Intern at Albertsons, where I work on full-stack engineering. I'm always looking for opportunities to build, learn, and take on harder problems.",
 ];
 
@@ -70,15 +70,6 @@ export const projects: {
     liveUrl: "",
     repoUrl: "", // TODO: add GitHub repo link if public
   },
-  {
-    title: "Everguide Wealth Management — Multi-Agent AI Platform",
-    period: "TODO: VERIFY DATES", // resume said "May 2018 – May 2020" which is incorrect
-    description:
-      "Built a modular, multi-agent financial advisory platform in Python with FastAPI for portfolio analysis, risk assessment, and tax optimization. Used Google Gemini for context-aware recommendations and automated report generation, and engineered a unified memory system (semantic, episodic, and procedural layers) backed by MongoDB and the Fastino API.",
-    tech: ["Python", "FastAPI", "Gemini API", "Meta Llama", "MongoDB"],
-    liveUrl: "",
-    repoUrl: "", // TODO: add GitHub repo link if public
-  },
 ];
 
 export const experience: {
@@ -91,11 +82,11 @@ export const experience: {
   {
     company: "Albertsons",
     title: "Global Technology Intern — Full-Stack Engineering",
-    period: "2026 — Present", // TODO: VERIFY exact start (e.g. "Jun 2026 — Present")
-    location: "Pleasanton, CA", // TODO: VERIFY location
+    period: "Jun 2026 — Present",
+    location: "Pleasanton, CA", // TODO: VERIFY location (remote/hybrid?)
     bullets: [
-      // TODO: replace with what you're actually building — name the stack and the impact.
-      "Build full-stack features as part of the Global Technology team.",
+      "Building an end-to-end analytics manager that gives stakeholders visibility into product usage, as part of a broader end-to-end instrumentation ecosystem.",
+      // TODO: add the tech stack + any measurable impact once you can share it.
     ],
   },
   {
@@ -129,7 +120,7 @@ export const education: {
   {
     school: "University of California, Berkeley",
     credential:
-      "College of Computing, Data Science and Society", // TODO: VERIFY exact degree/major (e.g. "B.A. Data Science")
+      "Data Science Major · College of Computing, Data Science and Society",
     period: "Aug 2025 – May 2027",
     location: "Berkeley, CA",
   },

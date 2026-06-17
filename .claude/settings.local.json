@@ -15,7 +15,12 @@
       "Bash(echo \"exit: $?\")",
       "Bash(python3 -c ' *)",
       "Bash(npx tsc *)",
-      "Bash(echo \"TYPECHECK EXIT: $?\")"
+      "Bash(echo \"TYPECHECK EXIT: $?\")",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(brew install *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
