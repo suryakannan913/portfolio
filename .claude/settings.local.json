@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git --version)",
+      "Bash(echo \"git: $\\(git --version || echo 'NOT installed'\\)\")",
+      "Bash(gh --version)",
+      "Bash(echo \"gh: $\\(gh --version)",
+      "Read(//private/tmp/**)",
+      "Bash(python3 -c \"import pypdf; print\\('pypdf ok'\\)\")",
+      "Bash(python3 -c \"import PyPDF2; print\\('PyPDF2 ok'\\)\")",
+      "Bash(python3 -c \"import Quartz; print\\('Quartz ok'\\)\")",
+      "Bash(python3 -m pip install --user --quiet pypdf)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(python3 -c ' *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"TYPECHECK EXIT: $?\")"
+    ]
+  }
+}

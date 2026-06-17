@@ -1,0 +1,345 @@
+import {
+  profile,
+  about,
+  skills,
+  projects,
+  experience,
+  education,
+  certifications,
+} from "@/content";
+
+export default function Home() {
+  return (
+    <div className="mx-auto max-w-3xl px-6">
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Certifications />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+function Nav() {
+  const links = [
+    ["About", "#about"],
+    ["Experience", "#experience"],
+    ["Projects", "#projects"],
+    ["Skills", "#skills"],
+    ["Education", "#education"],
+    ["Contact", "#contact"],
+  ];
+  return (
+    <header className="sticky top-0 z-10 -mx-6 border-b border-border bg-background/80 px-6 backdrop-blur">
+      <nav className="flex h-16 items-center justify-between">
+        <a href="#" className="font-semibold tracking-tight">
+          {profile.name}
+        </a>
+        <ul className="hidden gap-6 text-sm text-muted sm:flex">
+          {links.map(([label, href]) => (
+            <li key={href}>
+              <a
+                href={href}
+                className="transition-colors hover:text-foreground"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="py-20 sm:py-28">
+      <p className="mb-3 text-sm font-medium text-accent">Hi, I'm</p>
+      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+        {profile.name}
+      </h1>
+      <p className="mt-2 text-xl text-muted sm:text-2xl">{profile.role}</p>
+      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/80">
+        {profile.tagline}
+      </p>
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="#contact"
+          className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        >
+          Get in touch
+        </a>
+        {profile.socials.resume && (
+          <a
+            href={profile.socials.resume}
+            className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-card"
+          >
+            View resume
+          </a>
+        )}
+      </div>
+      <div className="mt-6 flex gap-4 text-sm text-muted">
+        {profile.socials.github && (
+          <a
+            href={profile.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            GitHub
+          </a>
+        )}
+        {profile.socials.linkedin && (
+          <a
+            href={profile.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            LinkedIn
+          </a>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-8 text-2xl font-bold tracking-tight">{children}</h2>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="scroll-mt-20 border-t border-border py-16">
+      <SectionHeading>About</SectionHeading>
+      <div className="space-y-4 text-lg leading-relaxed text-foreground/80">
+        {about.map((para, i) => (
+          <p key={i}>{para}</p>
+        ))}
+        {profile.location && (
+          <p className="text-base text-muted">📍 {profile.location}</p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function Experience() {
+  return (
+    <section
+      id="experience"
+      className="scroll-mt-20 border-t border-border py-16"
+    >
+      <SectionHeading>Experience</SectionHeading>
+      <div className="space-y-8">
+        {experience.map((job) => (
+          <div key={`${job.company}-${job.period}`} className="sm:flex sm:gap-8">
+            <p className="mb-2 shrink-0 text-sm text-muted sm:w-36 sm:pt-0.5">
+              {job.period}
+            </p>
+            <div>
+              <h3 className="font-semibold">
+                {job.title}{" "}
+                <span className="font-normal text-muted">· {job.company}</span>
+              </h3>
+              {job.location && (
+                <p className="text-sm text-muted">{job.location}</p>
+              )}
+              <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/80">
+                {job.bullets.map((b, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-2 size-1 shrink-0 rounded-full bg-muted" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Projects() {
+  return (
+    <section
+      id="projects"
+      className="scroll-mt-20 border-t border-border py-16"
+    >
+      <SectionHeading>Projects</SectionHeading>
+      <div className="grid gap-6 sm:grid-cols-2">
+        {projects.map((project) => (
+          <article
+            key={project.title}
+            className="flex flex-col rounded-xl border border-border bg-card p-6 transition-colors hover:border-accent/50"
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-lg font-semibold">{project.title}</h3>
+            </div>
+            {project.period && (
+              <p className="mt-1 text-xs text-muted">{project.period}</p>
+            )}
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/80">
+              {project.description}
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-1.5">
+              {project.tech.map((t) => (
+                <li
+                  key={t}
+                  className="rounded bg-background px-2 py-0.5 text-xs text-muted"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+            {(project.liveUrl || project.repoUrl) && (
+              <div className="mt-4 flex gap-4 text-sm font-medium">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    Live demo →
+                  </a>
+                )}
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted hover:text-foreground"
+                  >
+                    Code
+                  </a>
+                )}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Skills() {
+  return (
+    <section id="skills" className="scroll-mt-20 border-t border-border py-16">
+      <SectionHeading>Skills</SectionHeading>
+      <div className="space-y-6">
+        {skills.map((group) => (
+          <div key={group.category}>
+            <h3 className="mb-3 text-sm font-medium text-muted">
+              {group.category}
+            </h3>
+            <ul className="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-md border border-border bg-card px-3 py-1.5 text-sm"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="scroll-mt-20 border-t border-border py-16">
+      <SectionHeading>Certifications</SectionHeading>
+      <ul className="space-y-3">
+        {certifications.map((cert) => (
+          <li
+            key={`${cert.issuer}-${cert.name}`}
+            className="flex items-baseline justify-between gap-4"
+          >
+            <span>
+              <span className="font-medium">{cert.issuer}</span>
+              <span className="text-foreground/80"> — {cert.name}</span>
+            </span>
+            <span className="shrink-0 text-sm text-muted">{cert.date}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function Education() {
+  return (
+    <section
+      id="education"
+      className="scroll-mt-20 border-t border-border py-16"
+    >
+      <SectionHeading>Education</SectionHeading>
+      <div className="space-y-6">
+        {education.map((edu) => (
+          <div
+            key={edu.school}
+            className="sm:flex sm:items-baseline sm:justify-between sm:gap-6"
+          >
+            <div>
+              <h3 className="font-semibold">{edu.school}</h3>
+              <p className="text-sm text-foreground/80">{edu.credential}</p>
+              {edu.location && (
+                <p className="text-sm text-muted">{edu.location}</p>
+              )}
+            </div>
+            <p className="mt-1 shrink-0 text-sm text-muted sm:mt-0">
+              {edu.period}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section
+      id="contact"
+      className="scroll-mt-20 border-t border-border py-16"
+    >
+      <SectionHeading>Get in touch</SectionHeading>
+      <p className="max-w-xl text-lg leading-relaxed text-foreground/80">
+        I'm open to internships and new opportunities. The best way to reach me
+        is by email — I'd love to hear from you.
+      </p>
+      <a
+        href={`mailto:${profile.email}`}
+        className="mt-6 inline-block rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+      >
+        {profile.email}
+      </a>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-border py-8 text-center text-sm text-muted">
+      <p>© {profile.name}. Built with Next.js & Tailwind CSS.</p>
+    </footer>
+  );
+}
