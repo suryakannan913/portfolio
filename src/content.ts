@@ -13,6 +13,13 @@ export const profile = {
   tagline:
     "Full-stack software engineer and Data Science student at UC Berkeley. I build AI-powered applications — from RAG pipelines and knowledge graphs to full-stack web apps. Currently a Global Technology Intern at Albertsons.",
   location: "San Francisco Bay Area, CA",
+  // Short status line shown as a pill in the hero. Set to "" to hide.
+  availability: "Available for SWE & Data Science internships",
+  // Compact meta line shown under the hero. Edit freely.
+  meta: [
+    "Global Technology Intern @ Albertsons",
+    "Data Science @ UC Berkeley",
+  ],
   email: "suryakannan913@berkeley.edu",
   socials: {
     github: "https://github.com/suryakannan913",

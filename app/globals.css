@@ -31,6 +31,7 @@
   --color-accent-2: var(--accent-2);
   --color-card: var(--card);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
 }
 
 * {
@@ -44,7 +45,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -280,6 +281,71 @@ body {
   color: transparent;
 }
 
+.font-serif {
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+}
+
+/* Pulsing "available" status dot */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #22c55e;
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #22c55e;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Hero entrance on first load */
+.hero-in > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-in > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-in > *:nth-child(2) { animation-delay: 0.15s; }
+.hero-in > *:nth-child(3) { animation-delay: 0.25s; }
+.hero-in > *:nth-child(4) { animation-delay: 0.35s; }
+.hero-in > *:nth-child(5) { animation-delay: 0.45s; }
+
+@keyframes hero-rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* Editorial experience / index rows */
+.index-row {
+  position: relative;
+  transition:
+    border-color 0.3s ease,
+    padding 0.3s ease;
+}
+.index-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.index-row:hover::after {
+  width: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -290,6 +356,14 @@ body {
     transition: none;
   }
   .bg-fx-blob {
+    animation: none;
+  }
+  .hero-in > * {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .status-dot::after {
     animation: none;
   }
 }

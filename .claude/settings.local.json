@@ -21,7 +21,13 @@
       "Bash(brew install *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "WebFetch(domain:portfolio-two-mu-67f3jquis6.vercel.app)"
+      "WebFetch(domain:portfolio-two-mu-67f3jquis6.vercel.app)",
+      "WebFetch(domain:perryw-2023.webflow.io)",
+      "WebFetch(domain:mikematas.com)",
+      "WebFetch(domain:www.marco.fyi)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"next dev\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
