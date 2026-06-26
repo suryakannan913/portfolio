@@ -1,4 +1,4 @@
-import { education, certifications } from "@/content";
+import { education, certifications, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import SpotlightCard from "../components/SpotlightCard";
@@ -11,6 +11,9 @@ export default function EducationPage() {
       <Reveal direction="right">
         <section className="py-20">
           <SectionHeading index="05">Education</SectionHeading>
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-foreground/70">
+            {pageIntros.education}
+          </p>
           <div className="mb-16">
             {education.map((edu) => (
               <div

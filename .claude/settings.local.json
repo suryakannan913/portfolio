@@ -27,7 +27,14 @@
       "WebFetch(domain:www.marco.fyi)",
       "Bash(kill %1)",
       "Bash(pkill -f \"next dev\")",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -m py_compile main.py config.py database.py models.py schemas.py services/llm_service.py routes/chat.py)",
+      "Bash(cd /Users/skann12/projects/ai-study-buddy/frontend && npm install 2>&1 | tail -4 && echo \"=== build ===\" && npm run build 2>&1 | tail -16)",
+      "Bash(git fetch *)",
+      "Bash(git rebase *)",
+      "Bash(ls -d /Users/skann12/projects/*/ 2>/dev/null)",
+      "Bash(git config *)",
+      "Bash(gh api *)"
     ]
   }
 }

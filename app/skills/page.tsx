@@ -1,4 +1,4 @@
-import { skills } from "@/content";
+import { skills, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 
@@ -10,6 +10,9 @@ export default function SkillsPage() {
       <Reveal direction="right">
         <section className="py-20">
           <SectionHeading index="04">Skills</SectionHeading>
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-foreground/70">
+            {pageIntros.skills}
+          </p>
           <div className="space-y-6">
             {skills.map((group) => (
               <div key={group.category}>

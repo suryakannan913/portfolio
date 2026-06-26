@@ -1,4 +1,4 @@
-import { projects } from "@/content";
+import { projects, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import ProjectCarousel from "../components/ProjectCarousel";
@@ -11,6 +11,9 @@ export default function ProjectsPage() {
       <Reveal direction="left">
         <section className="py-20">
           <SectionHeading index="03">Projects</SectionHeading>
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-foreground/70">
+            {pageIntros.projects}
+          </p>
           <ProjectCarousel items={projects} />
         </section>
       </Reveal>

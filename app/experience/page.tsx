@@ -1,4 +1,4 @@
-import { experience } from "@/content";
+import { experience, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 
@@ -10,6 +10,9 @@ export default function ExperiencePage() {
       <Reveal direction="right">
         <section className="py-20">
           <SectionHeading index="02">Experience</SectionHeading>
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-foreground/70">
+            {pageIntros.experience}
+          </p>
           <div>
             {experience.map((job) => (
               <div

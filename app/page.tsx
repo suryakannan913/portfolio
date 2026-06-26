@@ -76,47 +76,42 @@ function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Section grid — doorways to each section page                       */
+/*  Section grid — previews that double as doorways to each page       */
 /* ------------------------------------------------------------------ */
 
-const sections = [
-  {
-    index: "01",
-    label: "About",
-    href: "/about",
-    teaser: about[0].slice(0, 90) + "…",
-  },
-  {
-    index: "02",
-    label: "Experience",
-    href: "/experience",
-    teaser: experience.map((e) => e.company).join(" · "),
-  },
-  {
-    index: "03",
-    label: "Projects",
-    href: "/projects",
-    teaser: `${projects.length} projects — ${projects.map((p) => p.title.split("—")[0].trim()).join(", ")}`,
-  },
-  {
-    index: "04",
-    label: "Skills",
-    href: "/skills",
-    teaser: skills.flatMap((g) => g.items.slice(0, 2)).join(" · "),
-  },
-  {
-    index: "05",
-    label: "Education",
-    href: "/education",
-    teaser: education.map((e) => e.school).join(" · "),
-  },
-  {
-    index: "06",
-    label: "Contact",
-    href: "/contact",
-    teaser: `Let's connect — ${profile.email}`,
-  },
-];
+function SectionCard({
+  index,
+  label,
+  href,
+  wide = false,
+  children,
+}: {
+  index: string;
+  label: string;
+  href: string;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group relative flex flex-col rounded-2xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card/70 hover:shadow-lg hover:shadow-accent/5 ${
+        wide ? "sm:col-span-2" : ""
+      }`}
+    >
+      <div className="flex items-baseline justify-between">
+        <span className="font-mono text-xs text-accent">{index}</span>
+        <span className="text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent">
+          ↗
+        </span>
+      </div>
+      <h3 className="mt-2 font-serif text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent">
+        {label}
+      </h3>
+      <div className="mt-2.5 text-sm text-muted">{children}</div>
+    </Link>
+  );
+}
 
 function SectionGrid() {
   return (
@@ -125,24 +120,70 @@ function SectionGrid() {
         Explore
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {sections.map(({ index, label, href, teaser }) => (
-          <Link
-            key={href}
-            href={href}
-            className="group relative rounded-2xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card/70 hover:shadow-lg hover:shadow-accent/5"
-          >
-            <div className="flex items-baseline justify-between">
-              <span className="font-mono text-xs text-accent">{index}</span>
-              <span className="text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent">
-                ↗
-              </span>
-            </div>
-            <h3 className="mt-2 font-serif text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent">
-              {label}
-            </h3>
-            <p className="mt-1.5 line-clamp-2 text-sm text-muted">{teaser}</p>
-          </Link>
-        ))}
+        <SectionCard index="01" label="About" href="/about" wide>
+          <p className="line-clamp-2 leading-relaxed">{about[0]}</p>
+        </SectionCard>
+
+        <SectionCard index="02" label="Experience" href="/experience">
+          <p className="font-medium text-foreground/80">{experience[0].title}</p>
+          <p className="mt-0.5 text-accent">
+            {experience[0].company}
+            <span className="text-muted"> · {experience[0].period}</span>
+          </p>
+          {experience.length > 1 && (
+            <p className="mt-1.5 text-xs text-muted">
+              + {experience.length - 1} more role
+              {experience.length - 1 > 1 ? "s" : ""}
+            </p>
+          )}
+        </SectionCard>
+
+        <SectionCard index="03" label="Projects" href="/projects">
+          <ul className="space-y-1">
+            {projects.map((p) => (
+              <li key={p.title} className="flex items-center gap-2">
+                <span className="size-1 shrink-0 rounded-full bg-accent" />
+                <span className="text-foreground/80">
+                  {p.title.split("—")[0].trim()}
+                </span>
+                {p.isComingSoon && (
+                  <span className="text-[10px] uppercase tracking-wide text-accent/70">
+                    soon
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        <SectionCard index="04" label="Skills" href="/skills">
+          <ul className="flex flex-wrap gap-1.5">
+            {skills
+              .flatMap((g) => g.items)
+              .slice(0, 8)
+              .map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-border bg-background/60 px-2.5 py-0.5 text-xs"
+                >
+                  {item}
+                </li>
+              ))}
+          </ul>
+        </SectionCard>
+
+        <SectionCard index="05" label="Education" href="/education">
+          {education.map((e) => (
+            <p key={e.school} className="text-foreground/80">
+              {e.school}
+            </p>
+          ))}
+        </SectionCard>
+
+        <SectionCard index="06" label="Contact" href="/contact" wide>
+          <p>Open to internships and new opportunities.</p>
+          <p className="mt-0.5 text-accent">{profile.email}</p>
+        </SectionCard>
       </div>
     </section>
   );
