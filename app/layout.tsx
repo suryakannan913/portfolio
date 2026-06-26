@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
 import { profile } from "@/content";
 import InteractiveBackground from "./components/InteractiveBackground";
+import Nav from "./components/Nav";
 import "./globals.css";
 
 const geist = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`${geist.variable} ${instrumentSerif.variable} antialiased`}
       >
         <InteractiveBackground />
+        <Nav />
         {children}
       </body>
     </html>

@@ -67,6 +67,7 @@ export const projects: {
   tech: string[];
   liveUrl: string;
   repoUrl: string;
+  isComingSoon?: boolean;
 }[] = [
   {
     title: "Course Recommendation — Hybrid RAG System",
@@ -75,7 +76,27 @@ export const projects: {
       "Engineered a hybrid retrieval system pairing a Neo4j knowledge graph with FAISS vector search to compare retrieval accuracy on complex datasets. Hit 100% accuracy on multi-hop logical queries (where standard vector RAG failed) and boosted faithfulness scores by 40% by using graph structure to eliminate GPT-4o hallucinations.",
     tech: ["Python", "Neo4j", "Cypher", "FAISS", "OpenAI API", "Flask"],
     liveUrl: "",
-    repoUrl: "", // TODO: add GitHub repo link if public
+    repoUrl: "",
+  },
+  {
+    title: "AI Study Buddy",
+    period: "Jun 2026 – Present",
+    description:
+      "Full-stack RAG-powered tutor app — upload your course PDFs and ask questions answered from your own notes, not generic LLM knowledge. Built a complete pipeline from PDF extraction and chunking through vector embedding and semantic retrieval, all wired into a conversational interface.",
+    tech: ["Next.js", "FastAPI", "Python", "Groq", "Qdrant", "PostgreSQL"],
+    liveUrl: "",
+    repoUrl: "https://github.com/suryakannan913/ai-study-buddy",
+    isComingSoon: true,
+  },
+  {
+    title: "Hexopolis",
+    period: "Coming 2026",
+    description:
+      "Browser-based strategy game built on hexagonal tile mechanics — resource management, settlement building, and turn-based play. Features a game AI opponent using heuristic board evaluation and planned real-time multiplayer via WebSockets.",
+    tech: ["Next.js", "Canvas API", "FastAPI", "Python", "PostgreSQL", "Zustand"],
+    liveUrl: "",
+    repoUrl: "",
+    isComingSoon: true,
   },
 ];
 
