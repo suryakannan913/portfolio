@@ -63,8 +63,35 @@ export const posts: Post[] = [
         text: "So I modeled the catalog as a graph instead: courses, topics, prerequisites, and terms as nodes, with the relationships between them as explicit, typed edges. Now a multi-hop question becomes a traversal — a Cypher query that walks the prerequisite edges — rather than something the model has to infer from prose.",
       },
       {
+        type: "code",
+        lang: "cypher",
+        code: `// "What can I take next that builds on what I've finished?"
+MATCH (done:Course)-[:UNLOCKS]->(next:Course)
+WHERE done.code IN $completed
+  AND next.term IN $terms
+  AND NOT EXISTS {
+    MATCH (req:Course)-[:UNLOCKS]->(next)
+    WHERE NOT req.code IN $completed
+  }
+RETURN next.code, next.title
+ORDER BY next.code`,
+      },
+      {
+        type: "p",
+        text: "That's the whole multi-hop question expressed declaratively: courses unlocked by ones I've passed, offered when I can take them, with every prerequisite already satisfied. No inference required — the relationships are in the data, so the model can't hallucinate a prerequisite that doesn't exist.",
+      },
+      {
         type: "p",
         text: "The hybrid part matters: I didn't throw out vector search. Open-ended semantic questions still go to FAISS; relational ones go to the graph. Both feed their context to the LLM. The retrieval strategy gets matched to the shape of the question.",
+      },
+      {
+        type: "code",
+        lang: "python",
+        code: `def retrieve(query: str) -> list[str]:
+    # Relational questions hit the graph; everything else hits vectors.
+    if is_relational(query):
+        return graph_search(query)   # Cypher traversal over Neo4j
+    return vector_search(query)      # FAISS nearest-neighbor`,
       },
       {
         type: "h2",

@@ -46,12 +46,19 @@ function renderBlock(block: Block, i: number) {
       );
     case "code":
       return (
-        <pre
+        <div
           key={i}
-          className="overflow-x-auto rounded-xl border border-border bg-card p-4 text-sm"
+          className="overflow-hidden rounded-xl border border-border bg-card"
         >
-          <code>{block.code}</code>
-        </pre>
+          {block.lang && (
+            <div className="border-b border-border px-4 py-1.5 font-mono text-xs text-muted">
+              {block.lang}
+            </div>
+          )}
+          <pre className="overflow-x-auto p-4 text-sm leading-relaxed">
+            <code className="font-mono">{block.code}</code>
+          </pre>
+        </div>
       );
     default:
       return (
