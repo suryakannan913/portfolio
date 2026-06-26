@@ -9,6 +9,7 @@ const links = [
   ["Projects", "/projects"],
   ["Skills", "/skills"],
   ["Education", "/education"],
+  ["Writing", "/writing"],
   ["Contact", "/contact"],
 ] as const;
 
@@ -29,7 +30,9 @@ export default function Nav() {
               <Link
                 href={href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname === href ? "text-foreground" : ""
+                  pathname === href || pathname.startsWith(href + "/")
+                    ? "text-foreground"
+                    : ""
                 }`}
               >
                 {label}

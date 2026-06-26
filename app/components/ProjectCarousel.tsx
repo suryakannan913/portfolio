@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import SpotlightCard from "./SpotlightCard";
 
 type Project = {
+  slug: string;
   title: string;
   period: string;
   description: string;
@@ -10,6 +12,7 @@ type Project = {
   liveUrl: string;
   repoUrl: string;
   isComingSoon?: boolean;
+  caseStudy?: unknown;
 };
 
 export default function ProjectCarousel({ items }: { items: Project[] }) {
@@ -72,20 +75,26 @@ export default function ProjectCarousel({ items }: { items: Project[] }) {
                   ))}
                 </ul>
 
-                {(project.liveUrl || project.repoUrl) && (
-                  <div className="mt-4 flex gap-4 text-sm font-medium">
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                        Live demo →
-                      </a>
-                    )}
-                    {project.repoUrl && (
-                      <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground">
-                        Code
-                      </a>
-                    )}
-                  </div>
-                )}
+                <div className="mt-4 flex flex-wrap items-center gap-4 text-sm font-medium">
+                  {Boolean(project.caseStudy) && (
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="text-accent hover:underline"
+                    >
+                      Read case study →
+                    </Link>
+                  )}
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      Live demo →
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground">
+                      Code
+                    </a>
+                  )}
+                </div>
               </SpotlightCard>
             </div>
           ))}

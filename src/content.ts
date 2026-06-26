@@ -74,7 +74,14 @@ export const skills: { category: string; items: string[] }[] = [
   },
 ];
 
+export type CaseStudy = {
+  overview: string;
+  metrics?: { label: string; value: string }[];
+  sections: { heading: string; body: string[] }[];
+};
+
 export const projects: {
+  slug: string;
   title: string;
   period: string;
   description: string;
@@ -82,8 +89,10 @@ export const projects: {
   liveUrl: string;
   repoUrl: string;
   isComingSoon?: boolean;
+  caseStudy?: CaseStudy;
 }[] = [
   {
+    slug: "course-recommendation-rag",
     title: "Course Recommendation — Hybrid RAG System",
     period: "Jan 2026 – Apr 2026",
     description:
@@ -91,8 +100,41 @@ export const projects: {
     tech: ["Python", "Neo4j", "Cypher", "FAISS", "OpenAI API", "Flask"],
     liveUrl: "",
     repoUrl: "",
+    caseStudy: {
+      overview:
+        "A course recommender that can answer the questions students actually ask — not just 'find me something similar,' but 'what should I take next that builds on what I've already done and fits my schedule?' Standard vector RAG falls apart on that kind of multi-step reasoning. I built a hybrid system that routes those queries through a knowledge graph instead, and measured the difference.",
+      metrics: [
+        { label: "Multi-hop query accuracy", value: "100%" },
+        { label: "Faithfulness improvement", value: "+40%" },
+        { label: "Retrieval strategies compared", value: "2" },
+      ],
+      sections: [
+        {
+          heading: "The problem",
+          body: [
+            "Vector search is great at semantic similarity — give it a query and it finds chunks that talk about the same thing. But course recommendation isn't really a similarity problem. The interesting questions are relational: which courses list this one as a prerequisite, what builds on a topic I've already covered, what's offered in a term I can actually take it.",
+            "When I tested a standard vector RAG pipeline on these multi-hop logical queries, it consistently retrieved topically-related-but-wrong chunks and the LLM confidently hallucinated prerequisites that didn't exist. The retrieval layer simply couldn't traverse relationships.",
+          ],
+        },
+        {
+          heading: "The approach",
+          body: [
+            "I modeled the course catalog as a Neo4j knowledge graph — courses, topics, prerequisites, and terms as nodes, with the relationships between them as typed edges. Relational queries get answered by traversing the graph with Cypher; open-ended semantic queries still go to FAISS vector search.",
+            "Both retrieval paths feed their context into GPT-4o, so the model generates from grounded, structurally-correct information instead of guessing at relationships. Building both pipelines side by side let me measure exactly where each one wins.",
+          ],
+        },
+        {
+          heading: "The results",
+          body: [
+            "On multi-hop logical queries — the ones standard vector RAG got wrong — the graph-backed system hit 100% accuracy, because prerequisite chains are explicit edges rather than something the model has to infer. Grounding answers in graph structure also raised faithfulness scores by 40% by eliminating the hallucinated relationships.",
+            "The bigger takeaway: retrieval strategy should match the shape of the question. Semantic similarity and relational traversal are different tools, and a hybrid system gets to use the right one per query.",
+          ],
+        },
+      ],
+    },
   },
   {
+    slug: "ai-study-buddy",
     title: "AI Study Buddy",
     period: "Jun 2026 – Present",
     description:
@@ -101,8 +143,34 @@ export const projects: {
     liveUrl: "",
     repoUrl: "https://github.com/suryakannan913/ai-study-buddy",
     isComingSoon: true,
+    caseStudy: {
+      overview:
+        "A study tool that tutors you from your own material. Most AI chatbots answer from general knowledge — useful, but they don't know what's in your professor's slides. AI Study Buddy lets a student upload their PDFs and get patient, conversational explanations grounded in those specific notes, using a retrieval-augmented generation pipeline I built end to end.",
+      sections: [
+        {
+          heading: "The idea",
+          body: [
+            "Generic LLM tutoring has a grounding problem: it can explain a concept, but not your concept the way your course frames it. The fix is RAG — retrieve the relevant passages from the student's own materials and hand them to the model as context, so answers stay anchored to the source.",
+          ],
+        },
+        {
+          heading: "How it works",
+          body: [
+            "When a student uploads a PDF, the backend extracts the text, splits it into overlapping ~500-token chunks, and embeds each chunk locally with a fastembed model. Those vectors live in Qdrant. On a question, the query gets embedded the same way, Qdrant returns the closest passages, and they're injected into the prompt before it reaches the LLM (Llama 3.3 70B via Groq).",
+            "The stack is a FastAPI backend, a Next.js chat frontend, and Postgres for conversation history. Embeddings run locally rather than through an API, which keeps the pipeline free to run and avoids shipping student material to a third-party embedding service.",
+          ],
+        },
+        {
+          heading: "Status",
+          body: [
+            "The core chat and the full RAG pipeline (upload → chunk → embed → retrieve → answer) are built and working. A live demo is coming once auth and the progress dashboard land and it's deployed.",
+          ],
+        },
+      ],
+    },
   },
   {
+    slug: "hexopolis",
     title: "Hexopolis",
     period: "Coming 2026",
     description:
@@ -111,6 +179,31 @@ export const projects: {
     liveUrl: "",
     repoUrl: "",
     isComingSoon: true,
+    caseStudy: {
+      overview:
+        "A from-scratch take on the hex-and-resource strategy genre, built to stretch a different set of muscles than my AI work: game-state modeling, a rules engine, board rendering on Canvas, and an AI opponent that has to reason about a board rather than retrieve from one.",
+      sections: [
+        {
+          heading: "Why build a game",
+          body: [
+            "AI projects show I can work with data and models. A game shows something different — that I can model complex, stateful systems with a lot of interacting rules and keep them correct. A turn-based strategy game is a clean way to demonstrate that without the networking complexity of a real-time title.",
+          ],
+        },
+        {
+          heading: "What it involves",
+          body: [
+            "The core is a game engine: a hexagonal board graph, resource production tied to dice rolls, settlement and road placement with adjacency rules, and a turn state machine. On top of that sits an AI opponent that evaluates board positions heuristically to decide its moves.",
+            "The frontend renders the board with the Canvas API and manages client state with Zustand; a FastAPI backend holds authoritative game state, with real-time multiplayer over WebSockets planned for a later phase.",
+          ],
+        },
+        {
+          heading: "Status",
+          body: [
+            "In active development — the engine and rules come first, because the game has to be correct before it can be pretty or multiplayer.",
+          ],
+        },
+      ],
+    },
   },
 ];
 

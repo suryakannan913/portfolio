@@ -34,7 +34,10 @@
       "Bash(git rebase *)",
       "Bash(ls -d /Users/skann12/projects/*/ 2>/dev/null)",
       "Bash(git config *)",
-      "Bash(gh api *)"
+      "Bash(gh api *)",
+      "Bash(node -p \"require\\('./package.json'\\).dependencies.next\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)"
     ]
   }
 }

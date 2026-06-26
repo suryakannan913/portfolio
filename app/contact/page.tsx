@@ -19,7 +19,7 @@ export default function ContactPage() {
     <main className="mx-auto max-w-3xl px-6">
       <Reveal direction="scale">
         <section className="py-24">
-          <SectionHeading index="06">Get in touch</SectionHeading>
+          <SectionHeading index="07">Get in touch</SectionHeading>
           <p className="max-w-xl text-lg leading-relaxed text-foreground/80">
             I am open to internships and new opportunities. The best way to reach me
             is by email — I would love to hear from you.
