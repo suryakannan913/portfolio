@@ -3,7 +3,12 @@ import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import SpotlightCard from "../components/SpotlightCard";
 
-export const metadata = { title: "Education — Surya Kannan" };
+export const metadata = {
+  title: "Education — Surya Kannan",
+  description:
+    "Surya Kannan's education — Data Science at UC Berkeley — plus professional certifications from Neo4j, Amazon, and Google.",
+  alternates: { canonical: "/education" },
+};
 
 export default function EducationPage() {
   return (

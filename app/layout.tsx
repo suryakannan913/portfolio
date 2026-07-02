@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
 import { profile } from "@/content";
+import { siteUrl } from "@/site";
 import InteractiveBackground from "./components/InteractiveBackground";
 import Nav from "./components/Nav";
 import "./globals.css";
@@ -18,12 +19,37 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role}`,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${profile.name} — ${profile.role}`,
+    template: `%s`,
+  },
   description: profile.tagline,
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    profile.name,
+    "Software Engineer",
+    "Data Science",
+    "UC Berkeley",
+    "Full-Stack",
+    "AI",
+    "RAG",
+    "Machine Learning",
+  ],
+  authors: [{ name: profile.name }],
   openGraph: {
     title: `${profile.name} — ${profile.role}`,
     description: profile.tagline,
+    url: siteUrl,
+    siteName: profile.name,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} — ${profile.role}`,
+    description: profile.tagline,
   },
 };
 

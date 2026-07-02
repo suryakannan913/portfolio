@@ -7,7 +7,6 @@ import {
   skills,
   education,
 } from "@/content";
-import { posts } from "@/writing";
 import Reveal from "./components/Reveal";
 import SocialLinks from "./components/SocialLinks";
 
@@ -181,20 +180,7 @@ function SectionGrid() {
           ))}
         </SectionCard>
 
-        <SectionCard index="06" label="Writing" href="/writing">
-          <ul className="space-y-1">
-            {posts.slice(0, 2).map((p) => (
-              <li key={p.slug} className="flex items-start gap-2">
-                <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" />
-                <span className="line-clamp-1 text-foreground/80">
-                  {p.title}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </SectionCard>
-
-        <SectionCard index="07" label="Contact" href="/contact">
+        <SectionCard index="06" label="Contact" href="/contact" wide>
           <p>Open to internships and new opportunities.</p>
           <p className="mt-0.5 text-accent">{profile.email}</p>
         </SectionCard>

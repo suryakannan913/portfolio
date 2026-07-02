@@ -14,7 +14,17 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
-  return { title: project ? `${project.title} — Surya Kannan` : "Project" };
+  if (!project) return { title: "Project" };
+  return {
+    title: `${project.title} — Surya Kannan`,
+    description: project.caseStudy?.overview ?? project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: `${project.title} — Surya Kannan`,
+      description: project.caseStudy?.overview ?? project.description,
+      type: "article",
+    },
+  };
 }
 
 export default async function ProjectCaseStudy({

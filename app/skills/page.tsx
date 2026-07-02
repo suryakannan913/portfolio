@@ -2,7 +2,12 @@ import { skills, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 
-export const metadata = { title: "Skills — Surya Kannan" };
+export const metadata = {
+  title: "Skills — Surya Kannan",
+  description:
+    "Surya Kannan's technical skills — Python, SQL, FastAPI, Neo4j, RAG, and the languages, platforms, and concepts behind his full-stack and AI work.",
+  alternates: { canonical: "/skills" },
+};
 
 export default function SkillsPage() {
   return (

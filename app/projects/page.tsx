@@ -3,7 +3,12 @@ import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import ProjectCarousel from "../components/ProjectCarousel";
 
-export const metadata = { title: "Projects — Surya Kannan" };
+export const metadata = {
+  title: "Projects — Surya Kannan",
+  description:
+    "Projects by Surya Kannan — a hybrid RAG system pairing a knowledge graph with vector search, an AI study tutor, and a browser-based strategy game engine.",
+  alternates: { canonical: "/projects" },
+};
 
 export default function ProjectsPage() {
   return (

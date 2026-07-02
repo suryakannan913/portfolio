@@ -2,7 +2,12 @@ import { about } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 
-export const metadata = { title: "About — Surya Kannan" };
+export const metadata = {
+  title: "About — Surya Kannan",
+  description:
+    "Surya Kannan — Data Science student at UC Berkeley and full-stack engineer building AI-powered applications. My background, focus, and what I'm looking for.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (

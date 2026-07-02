@@ -2,7 +2,12 @@ import { experience, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 
-export const metadata = { title: "Experience — Surya Kannan" };
+export const metadata = {
+  title: "Experience — Surya Kannan",
+  description:
+    "Surya Kannan's experience — Global Technology Intern at Albertsons, plus teaching and leadership roles spanning engineering and mentorship.",
+  alternates: { canonical: "/experience" },
+};
 
 export default function ExperiencePage() {
   return (
