@@ -346,6 +346,15 @@ body {
   width: 100%;
 }
 
+/* ----------------------------------------------------------------------- */
+/*  Reading progress bar (case-study pages)                                 */
+/* ----------------------------------------------------------------------- */
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.15s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

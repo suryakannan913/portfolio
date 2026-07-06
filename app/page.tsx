@@ -61,12 +61,12 @@ function Hero() {
             Get in touch
           </Link>
           {profile.socials.resume && (
-            <a
-              href={profile.socials.resume}
+            <Link
+              href="/resume"
               className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:bg-card"
             >
               View resume
-            </a>
+            </Link>
           )}
           <SocialLinks className="ml-1" />
         </div>

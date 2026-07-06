@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/skills",
     "/education",
     "/contact",
+    "/resume",
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({

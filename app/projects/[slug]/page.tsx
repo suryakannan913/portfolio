@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/content";
 import Reveal from "../../components/Reveal";
+import ReadingProgress from "../../components/ReadingProgress";
+import BackToTop from "../../components/BackToTop";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -40,6 +42,8 @@ export default async function ProjectCaseStudy({
 
   return (
     <main className="mx-auto max-w-3xl px-6">
+      {cs && <ReadingProgress />}
+      {cs && <BackToTop />}
       <Reveal direction="up">
         <article className="py-20">
           <Link
