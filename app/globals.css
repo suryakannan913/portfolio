@@ -10,16 +10,19 @@
   --card: #fafafa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #a1a1aa;
-    --border: #27272a;
-    --accent: #60a5fa;
-    --accent-2: #a855f7;
-    --card: #141414;
-  }
+/* Theme is resolved to a concrete "light" | "dark" before first paint by
+   the inline script in layout.tsx (see themeInitScript) — so this
+   attribute selector is the only source of dark-mode styling. There's no
+   `@media (prefers-color-scheme)` fallback needed; the script already
+   reads system preference itself when the user hasn't picked explicitly. */
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #a1a1aa;
+  --border: #27272a;
+  --accent: #60a5fa;
+  --accent-2: #a855f7;
+  --card: #141414;
 }
 
 @theme inline {
@@ -48,6 +51,7 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -374,5 +378,8 @@ body {
   }
   .status-dot::after {
     animation: none;
+  }
+  body {
+    transition: none;
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
 import { profile } from "@/content";
 import { siteUrl } from "@/site";
+import { themeInitScript } from "@/theme-script";
 import InteractiveBackground from "./components/InteractiveBackground";
 import Nav from "./components/Nav";
 import "./globals.css";
@@ -59,7 +60,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Sets data-theme before paint to avoid a flash of the wrong theme. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body
         className={`${geist.variable} ${instrumentSerif.variable} antialiased`}
       >

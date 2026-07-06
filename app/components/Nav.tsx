@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "@/content";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   ["About", "/about"],
@@ -70,31 +71,35 @@ export default function Nav() {
           {profile.name}
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden gap-6 text-sm text-muted sm:flex">
-          {links.map(([label, href]) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`transition-colors hover:text-foreground ${
-                  isActive(href) ? "text-foreground" : ""
-                }`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center gap-4">
+          {/* Desktop links */}
+          <ul className="hidden gap-6 text-sm text-muted sm:flex">
+            {links.map(([label, href]) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`transition-colors hover:text-foreground ${
+                    isActive(href) ? "text-foreground" : ""
+                  }`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:text-accent sm:hidden"
-        >
-          {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
-        </button>
+          <ThemeToggle />
+
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:text-accent sm:hidden"
+          >
+            {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu panel */}
