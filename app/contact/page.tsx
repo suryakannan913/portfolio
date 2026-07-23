@@ -31,7 +31,7 @@ export default function ContactPage() {
           </p>
           <a
             href={`mailto:${profile.email}`}
-            className="group mt-8 inline-flex items-center gap-3 break-all font-serif text-3xl tracking-tight sm:text-5xl"
+            className="display group mt-8 inline-flex items-center gap-3 break-all text-3xl sm:text-5xl"
           >
             <span className="gradient-text">{profile.email}</span>
             <ArrowUpRight className="size-7 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 sm:size-9" />

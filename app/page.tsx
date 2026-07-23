@@ -12,71 +12,82 @@ import SocialLinks from "./components/SocialLinks";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-3xl px-6">
+    <div className="mx-auto max-w-4xl px-6">
       <main className="overflow-x-clip">
         <Hero />
+        <Reveal direction="up">
+          <StatStrip />
+        </Reveal>
         <Reveal direction="up">
           <SectionGrid />
         </Reveal>
       </main>
-      <Footer />
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hero                                                               */
+/*  Hero — Apple-style centered display headline                       */
 /* ------------------------------------------------------------------ */
 
 function Hero() {
-  const meta = [profile.role, ...profile.meta, profile.location].filter(Boolean);
   return (
-    <section className="py-24 sm:py-32">
-      <div className="hero-in">
-        {profile.availability && (
-          <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-xs font-medium text-muted backdrop-blur">
-            <span className="status-dot" />
-            {profile.availability}
-          </div>
-        )}
-        <h1 className="font-serif text-6xl font-normal leading-[0.92] tracking-tight sm:text-8xl">
-          {profile.name}
+    <section className="flex flex-col items-center py-28 text-center sm:py-36">
+      <div className="hero-in flex flex-col items-center">
+        <p className="text-sm font-medium tracking-wide text-muted">
+          {profile.role} · Data Science @ UC Berkeley
+        </p>
+        <h1 className="display mt-5 text-6xl sm:text-8xl">
+          Hello, I&apos;m <span className="gradient-text">Surya</span>.
         </h1>
-        <p className="mt-7 max-w-2xl text-xl leading-relaxed text-foreground/80 sm:text-2xl">
+        <p className="mt-7 max-w-2xl text-xl leading-relaxed text-muted sm:text-2xl">
           {profile.tagline}
         </p>
-        <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-muted">
-          {meta.map((m, i) => (
-            <span key={i} className="flex items-center gap-3">
-              {i > 0 && <span className="text-border">/</span>}
-              {m}
-            </span>
-          ))}
-        </div>
-        <div className="mt-9 flex flex-wrap items-center gap-4">
-          <Link
-            href="/contact"
-            className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-accent/40"
-          >
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <Link href="/contact" className="btn-primary">
             Get in touch
           </Link>
           {profile.socials.resume && (
-            <Link
-              href="/resume"
-              className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:bg-card"
-            >
-              View resume
+            <Link href="/resume" className="btn-secondary">
+              View resume <span aria-hidden>→</span>
             </Link>
           )}
-          <SocialLinks className="ml-1" />
         </div>
+        <SocialLinks className="mt-8 justify-center" />
       </div>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Section grid — previews that double as doorways to each page       */
+/*  Stat strip — bold inline metrics, pratik.ai-style                  */
+/* ------------------------------------------------------------------ */
+
+const stats = [
+  { value: "100%", label: "multi-hop query accuracy on graph RAG" },
+  { value: "+40%", label: "faithfulness improvement vs. vector-only" },
+  { value: "3", label: "full-stack AI projects built or in flight" },
+];
+
+function StatStrip() {
+  return (
+    <section className="border-t border-border py-16">
+      <div className="grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <div className="display text-5xl text-accent">{s.value}</div>
+            <p className="mx-auto mt-2 max-w-[16rem] text-sm text-muted">
+              {s.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Bento grid — borderless rounded cards on the surface color         */
 /* ------------------------------------------------------------------ */
 
 function SectionCard({
@@ -95,7 +106,7 @@ function SectionCard({
   return (
     <Link
       href={href}
-      className={`group relative flex flex-col rounded-2xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card/70 hover:shadow-lg hover:shadow-accent/5 ${
+      className={`group relative flex flex-col rounded-3xl bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 ${
         wide ? "sm:col-span-2" : ""
       }`}
     >
@@ -105,10 +116,10 @@ function SectionCard({
           ↗
         </span>
       </div>
-      <h3 className="mt-2 font-serif text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent">
+      <h3 className="display mt-3 text-2xl transition-colors duration-300 group-hover:text-accent">
         {label}
       </h3>
-      <div className="mt-2.5 text-sm text-muted">{children}</div>
+      <div className="mt-3 text-sm leading-relaxed text-muted">{children}</div>
     </Link>
   );
 }
@@ -121,7 +132,7 @@ function SectionGrid() {
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <SectionCard index="01" label="About" href="/about" wide>
-          <p className="line-clamp-2 leading-relaxed">{about[0]}</p>
+          <p className="line-clamp-2">{about[0]}</p>
         </SectionCard>
 
         <SectionCard index="02" label="Experience" href="/experience">
@@ -131,7 +142,7 @@ function SectionGrid() {
             <span className="text-muted"> · {experience[0].period}</span>
           </p>
           {experience.length > 1 && (
-            <p className="mt-1.5 text-xs text-muted">
+            <p className="mt-1.5 text-xs">
               + {experience.length - 1} more role
               {experience.length - 1 > 1 ? "s" : ""}
             </p>
@@ -164,7 +175,7 @@ function SectionGrid() {
               .map((item) => (
                 <li
                   key={item}
-                  className="rounded-full border border-border bg-background/60 px-2.5 py-0.5 text-xs"
+                  className="rounded-full bg-background px-2.5 py-0.5 text-xs"
                 >
                   {item}
                 </li>
@@ -186,18 +197,5 @@ function SectionGrid() {
         </SectionCard>
       </div>
     </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Footer                                                             */
-/* ------------------------------------------------------------------ */
-
-function Footer() {
-  return (
-    <footer className="flex flex-col items-center gap-3 border-t border-border py-10 text-center text-sm text-muted">
-      <SocialLinks />
-      <p>© {profile.name}. Built with Next.js & Tailwind CSS.</p>
-    </footer>
   );
 }

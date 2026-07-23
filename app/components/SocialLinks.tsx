@@ -45,7 +45,7 @@ export default function SocialLinks({ className = "" }: { className?: string }) 
           href={href}
           aria-label={label}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="flex size-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/20"
+          className="flex size-10 items-center justify-center rounded-full bg-card text-muted transition-all duration-300 hover:-translate-y-0.5 hover:text-accent hover:shadow-lg hover:shadow-accent/10"
         >
           <Icon className="size-[18px]" />
         </a>

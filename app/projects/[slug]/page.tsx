@@ -62,7 +62,7 @@ export default async function ProjectCaseStudy({
             <span className="text-sm text-muted">{project.period}</span>
           </div>
 
-          <h1 className="mt-3 font-serif text-4xl font-normal tracking-tight sm:text-5xl">
+          <h1 className="display mt-3 text-4xl sm:text-5xl">
             {project.title}
           </h1>
 
@@ -113,9 +113,9 @@ export default async function ProjectCaseStudy({
                   {cs.metrics.map((m) => (
                     <div
                       key={m.label}
-                      className="rounded-2xl border border-border bg-card/60 p-5 text-center backdrop-blur-sm"
+                      className="rounded-3xl bg-card p-6 text-center"
                     >
-                      <div className="font-serif text-3xl text-accent">
+                      <div className="display text-4xl text-accent">
                         {m.value}
                       </div>
                       <div className="mt-1 text-xs text-muted">{m.label}</div>
@@ -127,7 +127,7 @@ export default async function ProjectCaseStudy({
               <div className="mt-12 space-y-10">
                 {cs.sections.map((s) => (
                   <section key={s.heading}>
-                    <h2 className="font-serif text-2xl tracking-tight">
+                    <h2 className="display text-2xl">
                       {s.heading}
                     </h2>
                     <div className="mt-3 space-y-4 text-base leading-relaxed text-foreground/80">

@@ -66,7 +66,7 @@ export default function ThemeToggle() {
             ? "Switch to light theme"
             : "Switch to dark theme"
       }
-      className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:border-accent hover:text-accent"
+      className="flex size-8 shrink-0 items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-accent"
     >
       <span className={theme === null ? "invisible" : ""}>
         {theme === "dark" ? (

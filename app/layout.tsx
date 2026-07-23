@@ -5,6 +5,7 @@ import { siteUrl } from "@/site";
 import { themeInitScript } from "@/theme-script";
 import InteractiveBackground from "./components/InteractiveBackground";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const geist = Geist({
@@ -71,6 +72,9 @@ export default function RootLayout({
         <InteractiveBackground />
         <Nav />
         {children}
+        <div className="mx-auto max-w-4xl px-6">
+          <Footer />
+        </div>
       </body>
     </html>
   );

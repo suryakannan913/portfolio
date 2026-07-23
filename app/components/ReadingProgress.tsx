@@ -27,7 +27,7 @@ export default function ReadingProgress() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-16 z-20 h-[3px] bg-border/40">
+    <div className="pointer-events-none fixed inset-x-0 top-12 z-20 h-[3px] bg-border/40">
       <div
         className="progress-bar-fill h-full"
         style={{ width: `${progress}%` }}

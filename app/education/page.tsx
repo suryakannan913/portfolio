@@ -26,7 +26,7 @@ export default function EducationPage() {
                 className="index-row border-b border-border py-7 sm:flex sm:items-baseline sm:justify-between sm:gap-6"
               >
                 <div>
-                  <h3 className="font-serif text-2xl tracking-tight">{edu.school}</h3>
+                  <h3 className="display text-2xl">{edu.school}</h3>
                   <p className="mt-1 text-sm text-foreground/80">{edu.credential}</p>
                   {edu.location && <p className="text-sm text-muted">{edu.location}</p>}
                 </div>
@@ -40,10 +40,10 @@ export default function EducationPage() {
             {certifications.map((cert) => (
               <SpotlightCard
                 key={`${cert.issuer}-${cert.name}`}
-                className="rounded-2xl border border-border bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/10"
+                className="rounded-3xl bg-card p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                  <h3 className="font-serif text-xl tracking-tight transition-colors group-hover/sc:text-accent">
+                  <h3 className="display text-xl transition-colors group-hover/sc:text-accent">
                     <span className="text-accent">{cert.issuer}</span>{" "}
                     <span className="text-foreground/50">·</span> {cert.name}
                   </h3>

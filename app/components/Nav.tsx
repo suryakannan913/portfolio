@@ -62,18 +62,18 @@ export default function Nav() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/70 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-3xl items-center justify-between px-6">
+    <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+      <nav className="mx-auto flex h-12 max-w-4xl items-center justify-between px-6">
         <Link
           href="/"
-          className="font-serif text-xl tracking-tight transition-colors hover:text-accent"
+          className="font-serif text-lg tracking-tight transition-colors hover:text-accent"
         >
           {profile.name}
         </Link>
 
         <div className="flex items-center gap-4">
           {/* Desktop links */}
-          <ul className="hidden gap-6 text-sm text-muted sm:flex">
+          <ul className="hidden gap-6 text-xs text-muted sm:flex">
             {links.map(([label, href]) => (
               <li key={href}>
                 <Link
@@ -95,7 +95,7 @@ export default function Nav() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:text-accent sm:hidden"
+            className="flex size-8 items-center justify-center rounded-full text-foreground transition-colors hover:text-accent sm:hidden"
           >
             {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
           </button>
@@ -104,14 +104,14 @@ export default function Nav() {
 
       {/* Mobile menu panel */}
       <div
-        className={`fixed inset-0 top-16 z-20 bg-background/60 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
+        className={`fixed inset-0 top-12 z-20 bg-background/60 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setOpen(false)}
         aria-hidden={!open}
       />
       <div
-        className={`fixed inset-x-0 top-16 z-20 origin-top border-b border-border bg-background/95 backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] sm:hidden ${
+        className={`fixed inset-x-0 top-12 z-20 origin-top border-b border-border bg-background/95 backdrop-blur-xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] sm:hidden ${
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0"

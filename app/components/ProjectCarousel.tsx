@@ -38,14 +38,14 @@ export default function ProjectCarousel({ items }: { items: Project[] }) {
   return (
     <div className="relative">
       {/* Slide track */}
-      <div className="overflow-hidden rounded-2xl">
+      <div className="overflow-hidden rounded-3xl">
         <div
           className="flex transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {items.map((project, i) => (
             <div key={i} className="w-full min-w-full">
-              <SpotlightCard className="flex min-h-72 flex-col rounded-2xl border border-border bg-card/80 p-8 backdrop-blur-sm">
+              <SpotlightCard className="flex min-h-72 flex-col rounded-3xl bg-card p-8 sm:p-10">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     {project.isComingSoon && (
@@ -53,7 +53,7 @@ export default function ProjectCarousel({ items }: { items: Project[] }) {
                         Coming Soon
                       </span>
                     )}
-                    <h3 className="font-serif text-2xl tracking-tight">{project.title}</h3>
+                    <h3 className="display text-2xl">{project.title}</h3>
                     {project.period && (
                       <p className="mt-0.5 text-xs text-muted">{project.period}</p>
                     )}

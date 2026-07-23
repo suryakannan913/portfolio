@@ -25,7 +25,7 @@ export default function ExperiencePage() {
                 className="index-row border-b border-border py-7"
               >
                 <div className="flex flex-col gap-x-4 gap-y-1 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="font-serif text-2xl tracking-tight sm:text-3xl">
+                  <h3 className="display text-2xl sm:text-3xl">
                     {job.title}
                   </h3>
                   <span className="shrink-0 text-sm text-muted">{job.period}</span>
