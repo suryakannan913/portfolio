@@ -10,6 +10,11 @@ import {
 } from "@/content";
 import Reveal from "./components/Reveal";
 import SocialLinks from "./components/SocialLinks";
+import SectionCard from "./components/SectionCard";
+import HeroTitle from "./components/HeroTitle";
+import CountUp from "./components/CountUp";
+import BackgroundPaths from "./components/BackgroundPaths";
+import GitHubActivity from "./components/GitHubActivity";
 
 export default function Home() {
   return (
@@ -19,6 +24,7 @@ export default function Home() {
         <Reveal direction="up">
           <StatStrip />
         </Reveal>
+        <GitHubActivity />
         <Reveal direction="up">
           <SectionGrid />
         </Reveal>
@@ -28,19 +34,18 @@ export default function Home() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hero — Apple-style centered display headline                       */
+/*  Hero — anime.js letter entrance over KokonutUI background paths    */
 /* ------------------------------------------------------------------ */
 
 function Hero() {
   return (
-    <section className="flex flex-col items-center py-28 text-center sm:py-36">
-      <div className="hero-in flex flex-col items-center">
+    <section className="relative flex flex-col items-center py-28 text-center sm:py-36">
+      <BackgroundPaths />
+      <div className="hero-in relative flex flex-col items-center">
         <p className="text-sm font-medium tracking-wide text-muted">
           {profile.role} · Data Science @ UC Berkeley
         </p>
-        <h1 className="display mt-5 text-6xl sm:text-8xl">
-          Hello, I&apos;m <span className="gradient-text">Surya</span>.
-        </h1>
+        <HeroTitle />
         <p className="mt-7 max-w-2xl text-xl leading-relaxed text-muted sm:text-2xl">
           {profile.tagline}
         </p>
@@ -61,7 +66,7 @@ function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Stat strip — recruiter-scannable facts, derived from content.ts    */
+/*  Stat strip — recruiter-scannable facts with anime.js count-up      */
 /* ------------------------------------------------------------------ */
 
 const skillCount = skills.reduce((n, g) => n + g.items.length, 0);
@@ -81,7 +86,7 @@ function StatStrip() {
       <div className="grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
         {stats.map((s) => (
           <div key={s.label}>
-            <div className="display text-5xl text-accent">{s.value}</div>
+            <CountUp value={s.value} className="display text-5xl text-accent" />
             <p className="mx-auto mt-2 max-w-[16rem] text-sm text-muted">
               {s.label}
             </p>
@@ -93,48 +98,14 @@ function StatStrip() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Bento grid — borderless rounded cards on the surface color         */
+/*  Bento grid — Motion spring cards                                   */
 /* ------------------------------------------------------------------ */
-
-function SectionCard({
-  index,
-  label,
-  href,
-  wide = false,
-  children,
-}: {
-  index: string;
-  label: string;
-  href: string;
-  wide?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className={`group relative flex flex-col rounded-3xl bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 ${
-        wide ? "sm:col-span-2" : ""
-      }`}
-    >
-      <div className="flex items-baseline justify-between">
-        <span className="font-mono text-xs text-accent">{index}</span>
-        <span className="text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent">
-          ↗
-        </span>
-      </div>
-      <h3 className="display mt-3 text-2xl transition-colors duration-300 group-hover:text-accent">
-        {label}
-      </h3>
-      <div className="mt-3 text-sm leading-relaxed text-muted">{children}</div>
-    </Link>
-  );
-}
 
 function SectionGrid() {
   return (
     <section className="border-t border-border py-20">
       <p className="mb-8 font-mono text-xs uppercase tracking-widest text-muted">
-        Explore
+        Explore_
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <SectionCard index="01" label="About" href="/about" wide>

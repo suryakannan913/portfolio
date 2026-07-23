@@ -1,13 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 type Direction = "up" | "left" | "right" | "scale";
 
+const offsets: Record<Direction, { x?: number; y?: number; scale?: number }> = {
+  up: { y: 36 },
+  left: { x: -56 },
+  right: { x: 56 },
+  scale: { scale: 0.94 },
+};
+
 /**
- * Animates its children into view on scroll. `direction` controls where they
- * travel in from (e.g. "left"/"right" slide in horizontally and settle in the
- * middle). Falls back to fully visible if reduced motion is preferred.
+ * Animates its children into view on scroll with spring physics (Motion).
+ * `direction` controls where they travel in from. `delay` is in ms to stay
+ * compatible with the previous CSS implementation. Respects reduced motion.
  */
 export default function Reveal({
   children,
@@ -20,33 +27,27 @@ export default function Reveal({
   direction?: Direction;
   delay?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  const reduce = useReducedMotion();
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <div
-      ref={ref}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-      className={`reveal reveal-${direction} ${shown ? "reveal-in" : ""} ${className}`}
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, ...offsets[direction] }}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{
+        type: "spring",
+        stiffness: 90,
+        damping: 18,
+        mass: 0.9,
+        delay: delay / 1000,
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
