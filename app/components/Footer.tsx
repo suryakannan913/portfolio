@@ -3,22 +3,22 @@ import { profile } from "@/content";
 import SocialLinks from "./SocialLinks";
 
 const links = [
-  ["About", "/about"],
-  ["Experience", "/experience"],
-  ["Projects", "/projects"],
-  ["Skills", "/skills"],
-  ["Education", "/education"],
-  ["Contact", "/contact"],
+  ["about", "/about"],
+  ["experience", "/experience"],
+  ["projects", "/projects"],
+  ["skills", "/skills"],
+  ["education", "/education"],
+  ["contact", "/contact"],
 ] as const;
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border py-12">
+    <footer className="border-t border-border py-12 font-mono">
       <div className="flex flex-col items-center gap-6 text-center">
-        <span className="font-serif text-xl tracking-tight">
-          {profile.name}
+        <span className="text-lg font-semibold tracking-tight">
+          <span className="text-accent">~</span>/surya-kannan
         </span>
-        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted">
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted">
           {links.map(([label, href]) => (
             <li key={href}>
               <Link
@@ -32,7 +32,10 @@ export default function Footer() {
         </ul>
         <SocialLinks />
         <p className="text-xs text-muted">
-          © {profile.name}. Built with Next.js & Tailwind CSS.
+          © {profile.name} · built with next.js + tailwind · press{" "}
+          <kbd className="rounded border border-border px-1 py-0.5 text-[10px]">
+            ⌘K
+          </kbd>
         </p>
       </div>
     </footer>

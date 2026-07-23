@@ -14,7 +14,7 @@ import SectionCard from "./components/SectionCard";
 import HeroTitle from "./components/HeroTitle";
 import CountUp from "./components/CountUp";
 import BackgroundPaths from "./components/BackgroundPaths";
-import GitHubActivity from "./components/GitHubActivity";
+import TerminalPrompt from "./components/TerminalPrompt";
 
 export default function Home() {
   return (
@@ -24,7 +24,6 @@ export default function Home() {
         <Reveal direction="up">
           <StatStrip />
         </Reveal>
-        <GitHubActivity />
         <Reveal direction="up">
           <SectionGrid />
         </Reveal>
@@ -34,7 +33,7 @@ export default function Home() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hero — anime.js letter entrance over KokonutUI background paths    */
+/*  Hero — typed terminal prompt + anime.js letter entrance            */
 /* ------------------------------------------------------------------ */
 
 function Hero() {
@@ -42,9 +41,7 @@ function Hero() {
     <section className="relative flex flex-col items-center py-28 text-center sm:py-36">
       <BackgroundPaths />
       <div className="hero-in relative flex flex-col items-center">
-        <p className="text-sm font-medium tracking-wide text-muted">
-          {profile.role} · Data Science @ UC Berkeley
-        </p>
+        <TerminalPrompt />
         <HeroTitle />
         <p className="mt-7 max-w-2xl text-xl leading-relaxed text-muted sm:text-2xl">
           {profile.tagline}

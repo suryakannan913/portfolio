@@ -24,7 +24,7 @@ export default function ResumePage() {
             </a>
           </div>
 
-          <div className="overflow-hidden rounded-3xl bg-card">
+          <div className="overflow-hidden rounded-xl border border-border bg-card/50">
             <object
               data={profile.socials.resume}
               type="application/pdf"

@@ -10,6 +10,8 @@
 export const profile = {
   name: "Surya Kannan",
   role: "Software Engineer",
+  // Drop a headshot at public/me.jpg (square, ~800x800) and set this to "/me.jpg".
+  headshot: "",
   tagline:
     "Full-stack software engineer and Data Science student at UC Berkeley. I build AI-powered applications — from RAG pipelines and knowledge graphs to full-stack web apps. Currently a Global Technology Intern at Albertsons.",
   location: "San Francisco Bay Area, CA",
@@ -78,6 +80,9 @@ export type CaseStudy = {
   overview: string;
   metrics?: { label: string; value: string }[];
   sections: { heading: string; body: string[] }[];
+  // Screenshots for the case-study gallery. Drop files in public/projects/
+  // (e.g. "/projects/ai-study-buddy-chat.png", ~1600px wide) and list them here.
+  images?: { src: string; alt: string }[];
 };
 
 export const projects: {
@@ -88,6 +93,13 @@ export const projects: {
   tech: string[];
   liveUrl: string;
   repoUrl: string;
+  // Card thumbnail. Drop a file in public/projects/ (16:9, ~1200x675)
+  // and set e.g. "/projects/hexopolis-cover.png". Empty = placeholder slot.
+  image: string;
+  // If set, the case-study page embeds this URL as a playable demo iframe.
+  // For Hexopolis: set NEXT_PUBLIC_HEXOPOLIS_URL in .env.local (dev) or
+  // Vercel env settings (prod).
+  demoUrl?: string;
   isComingSoon?: boolean;
   caseStudy?: CaseStudy;
 }[] = [
@@ -100,6 +112,7 @@ export const projects: {
     tech: ["Python", "Neo4j", "Cypher", "FAISS", "OpenAI API", "Flask"],
     liveUrl: "",
     repoUrl: "",
+    image: "", // e.g. "/projects/course-rag-cover.png"
     caseStudy: {
       overview:
         "A course recommender that can answer the questions students actually ask — not just 'find me something similar,' but 'what should I take next that builds on what I've already done and fits my schedule?' Standard vector RAG falls apart on that kind of multi-step reasoning. I built a hybrid system that routes those queries through a knowledge graph instead, and measured the difference.",
@@ -142,6 +155,7 @@ export const projects: {
     tech: ["Next.js", "FastAPI", "Python", "Groq", "Qdrant", "PostgreSQL"],
     liveUrl: "",
     repoUrl: "https://github.com/suryakannan913/ai-study-buddy",
+    image: "", // e.g. "/projects/study-buddy-cover.png"
     isComingSoon: true,
     caseStudy: {
       overview:
@@ -178,6 +192,10 @@ export const projects: {
     tech: ["Next.js", "Canvas API", "FastAPI", "Python", "PostgreSQL", "Zustand"],
     liveUrl: "",
     repoUrl: "",
+    image: "", // e.g. "/projects/hexopolis-cover.png"
+    // Playable demo embed — set NEXT_PUBLIC_HEXOPOLIS_URL in .env.local
+    // (e.g. http://localhost:3001) or in Vercel env settings once deployed.
+    demoUrl: process.env.NEXT_PUBLIC_HEXOPOLIS_URL ?? "",
     isComingSoon: true,
     caseStudy: {
       overview:

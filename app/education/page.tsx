@@ -40,7 +40,7 @@ export default function EducationPage() {
             {certifications.map((cert) => (
               <SpotlightCard
                 key={`${cert.issuer}-${cert.name}`}
-                className="rounded-3xl bg-card p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40"
+                className="rounded-xl border border-border bg-card/50 p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                   <h3 className="display text-xl transition-colors group-hover/sc:text-accent">

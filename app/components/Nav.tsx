@@ -2,16 +2,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { profile } from "@/content";
 import ThemeToggle from "./ThemeToggle";
+import { OPEN_PALETTE_EVENT } from "./CommandPalette";
 
 const links = [
-  ["About", "/about"],
-  ["Experience", "/experience"],
-  ["Projects", "/projects"],
-  ["Skills", "/skills"],
-  ["Education", "/education"],
-  ["Contact", "/contact"],
+  ["about", "/about"],
+  ["experience", "/experience"],
+  ["projects", "/projects"],
+  ["skills", "/skills"],
+  ["education", "/education"],
+  ["contact", "/contact"],
 ] as const;
 
 function MenuIcon({ className = "" }: { className?: string }) {
@@ -63,18 +63,18 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur-xl">
-      <nav className="mx-auto flex h-12 max-w-4xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-12 max-w-4xl items-center justify-between px-6 font-mono">
         <Link
           href="/"
-          className="font-serif text-lg tracking-tight transition-colors hover:text-accent"
+          className="text-sm font-semibold tracking-tight transition-colors hover:text-accent"
         >
-          {profile.name}
+          <span className="text-accent">~</span>/surya-kannan
         </Link>
 
-        <div className="flex items-center gap-4">
-          {/* Desktop links */}
-          <ul className="hidden gap-6 text-xs text-muted sm:flex">
-            {links.map(([label, href]) => (
+        <div className="flex items-center gap-3">
+          {/* Desktop links — numbered, justin-kang style */}
+          <ul className="hidden items-center gap-5 text-xs text-muted sm:flex">
+            {links.map(([label, href], i) => (
               <li key={href}>
                 <Link
                   href={href}
@@ -82,11 +82,21 @@ export default function Nav() {
                     isActive(href) ? "text-foreground" : ""
                   }`}
                 >
+                  <span className="text-accent/70">0{i + 1}</span>
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
+
+          {/* Command palette trigger */}
+          <button
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+            aria-label="Open command palette"
+            className="hidden items-center gap-1 rounded border border-border px-1.5 py-0.5 text-[10px] text-muted transition-colors hover:border-accent hover:text-accent sm:flex"
+          >
+            ⌘K
+          </button>
 
           <ThemeToggle />
 
@@ -117,8 +127,8 @@ export default function Nav() {
             : "pointer-events-none -translate-y-2 opacity-0"
         }`}
       >
-        <ul className="mx-auto flex max-w-3xl flex-col px-6 py-2 text-base">
-          {links.map(([label, href]) => (
+        <ul className="mx-auto flex max-w-4xl flex-col px-6 py-2 font-mono text-sm">
+          {links.map(([label, href], i) => (
             <li key={href} className="border-b border-border/60 last:border-none">
               <Link
                 href={href}
@@ -126,6 +136,7 @@ export default function Nav() {
                   isActive(href) ? "text-accent" : "text-foreground"
                 }`}
               >
+                <span className="mr-2 text-accent/70">0{i + 1}</span>
                 {label}
               </Link>
             </li>

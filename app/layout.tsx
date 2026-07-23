@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { profile } from "@/content";
 import { siteUrl } from "@/site";
 import { themeInitScript } from "@/theme-script";
 import InteractiveBackground from "./components/InteractiveBackground";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import CommandPalette from "./components/CommandPalette";
 import "./globals.css";
 
 const geist = Geist({
@@ -13,10 +14,8 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: ["normal", "italic"],
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -67,10 +66,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body
-        className={`${geist.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${geist.variable} ${geistMono.variable} antialiased`}
       >
         <InteractiveBackground />
         <Nav />
+        <CommandPalette />
         {children}
         <div className="mx-auto max-w-4xl px-6">
           <Footer />

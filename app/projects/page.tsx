@@ -3,6 +3,7 @@ import { projects, pageIntros } from "@/content";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import SpotlightCard from "../components/SpotlightCard";
+import ImageSlot from "../components/ImageSlot";
 
 export const metadata = {
   title: "Projects — Surya Kannan",
@@ -25,19 +26,27 @@ export default function ProjectsPage() {
             {projects.map((project, i) => (
               <SpotlightCard
                 key={project.slug}
-                className="rounded-3xl bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 sm:p-10"
+                className="rounded-xl border border-border bg-card/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 sm:p-10"
               >
+                <ImageSlot
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  label={`${project.slug}-cover.png`}
+                  className="mb-6 aspect-video w-full"
+                />
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    {project.isComingSoon && (
-                      <span className="mb-3 inline-flex items-center rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
-                        Coming Soon
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded border border-border px-2 py-0.5 font-mono text-[11px] text-muted">
+                        {project.period}
                       </span>
-                    )}
-                    <h3 className="display text-2xl">{project.title}</h3>
-                    {project.period && (
-                      <p className="mt-0.5 text-xs text-muted">{project.period}</p>
-                    )}
+                      {project.isComingSoon && (
+                        <span className="rounded border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[11px] text-accent">
+                          coming_soon
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="display mt-3 text-2xl">{project.title}</h3>
                   </div>
                   <span className="font-mono text-sm text-muted/60">
                     {String(i + 1).padStart(2, "0")}

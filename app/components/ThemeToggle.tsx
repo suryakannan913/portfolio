@@ -34,19 +34,10 @@ export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
+    // The inline script in layout.tsx resolved the theme (dark by default,
+    // stored choice wins) before paint — just read it back.
     const current = document.documentElement.getAttribute("data-theme");
-    setTheme(current === "dark" ? "dark" : "light");
-
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    function onSystemChange(e: MediaQueryListEvent) {
-      // Only follow the system if the user hasn't made an explicit choice.
-      if (localStorage.getItem("theme")) return;
-      const next: Theme = e.matches ? "dark" : "light";
-      document.documentElement.setAttribute("data-theme", next);
-      setTheme(next);
-    }
-    mq.addEventListener("change", onSystemChange);
-    return () => mq.removeEventListener("change", onSystemChange);
+    setTheme(current === "light" ? "light" : "dark");
   }, []);
 
   function toggle() {

@@ -31,7 +31,7 @@ export default function SectionCard({
     >
       <Link
         href={href}
-        className="group relative flex h-full flex-col rounded-3xl bg-card p-8 transition-shadow duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40"
+        className="group relative flex h-full flex-col rounded-xl border border-border bg-card/50 p-8 transition-colors duration-300 hover:border-accent/40"
       >
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-xs text-accent">{index}</span>

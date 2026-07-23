@@ -4,6 +4,7 @@ import { projects } from "@/content";
 import Reveal from "../../components/Reveal";
 import ReadingProgress from "../../components/ReadingProgress";
 import BackToTop from "../../components/BackToTop";
+import ImageSlot from "../../components/ImageSlot";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -102,6 +103,41 @@ export default async function ProjectCaseStudy({
             </div>
           )}
 
+          <ImageSlot
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            label={`${project.slug}-cover.png`}
+            className="mt-8 aspect-video w-full"
+          />
+
+          {project.demoUrl && (
+            <section className="mt-10">
+              <h2 className="display text-2xl">
+                Live demo<span className="text-accent">_</span>
+              </h2>
+              <p className="mt-2 text-sm text-muted">
+                Playable build embedded below —{" "}
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  open full screen →
+                </a>
+              </p>
+              <div className="mt-4 overflow-hidden rounded-xl border border-border bg-card/50">
+                <iframe
+                  src={project.demoUrl}
+                  title={`${project.title} live demo`}
+                  className="aspect-video w-full"
+                  loading="lazy"
+                  allow="fullscreen"
+                />
+              </div>
+            </section>
+          )}
+
           {cs ? (
             <>
               <p className="mt-10 border-l-2 border-accent/40 pl-5 text-lg leading-relaxed text-foreground/80">
@@ -113,7 +149,7 @@ export default async function ProjectCaseStudy({
                   {cs.metrics.map((m) => (
                     <div
                       key={m.label}
-                      className="rounded-3xl bg-card p-6 text-center"
+                      className="rounded-xl border border-border bg-card/50 p-6 text-center"
                     >
                       <div className="display text-4xl text-accent">
                         {m.value}
@@ -138,6 +174,21 @@ export default async function ProjectCaseStudy({
                   </section>
                 ))}
               </div>
+
+              {cs.images && cs.images.length > 0 && (
+                <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {cs.images.map((img) => (
+                    <ImageSlot
+                      key={img.src}
+                      src={img.src}
+                      alt={img.alt}
+                      label="screenshot"
+                      className="aspect-video w-full"
+                      sizes="(max-width: 768px) 100vw, 384px"
+                    />
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <p className="mt-10 text-lg leading-relaxed text-foreground/80">

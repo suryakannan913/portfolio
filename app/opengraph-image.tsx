@@ -28,7 +28,7 @@ export default async function Image() {
   const serif = await loadSerif();
   const nameFont = serif ? "Instrument Serif" : "serif";
   const handle = profile.socials.github.replace(/^https?:\/\//, "");
-  const accentBar = "linear-gradient(120deg, #60a5fa, #a855f7)";
+  const accentBar = "linear-gradient(120deg, #2dd4bf, #22d3ee)";
 
   return new ImageResponse(
     (
@@ -42,7 +42,7 @@ export default async function Image() {
           padding: "80px",
           backgroundColor: "#0a0a0a",
           backgroundImage:
-            "radial-gradient(circle at 18% 12%, rgba(96,165,250,0.28), transparent 42%), radial-gradient(circle at 88% 92%, rgba(168,85,247,0.30), transparent 45%)",
+            "radial-gradient(circle at 18% 12%, rgba(45,212,191,0.25), transparent 42%), radial-gradient(circle at 88% 92%, rgba(34,211,238,0.22), transparent 45%)",
           color: "#ededed",
           fontFamily: "sans-serif",
         }}
@@ -109,7 +109,7 @@ export default async function Image() {
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", color: "#60a5fa" }}>{handle}</div>
+          <div style={{ display: "flex", color: "#2dd4bf" }}>{handle}</div>
         </div>
       </div>
     ),
