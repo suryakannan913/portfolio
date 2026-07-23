@@ -6,6 +6,7 @@ import {
   projects,
   skills,
   education,
+  certifications,
 } from "@/content";
 import Reveal from "./components/Reveal";
 import SocialLinks from "./components/SocialLinks";
@@ -60,13 +61,18 @@ function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Stat strip — bold inline metrics, pratik.ai-style                  */
+/*  Stat strip — recruiter-scannable facts, derived from content.ts    */
 /* ------------------------------------------------------------------ */
 
+const skillCount = skills.reduce((n, g) => n + g.items.length, 0);
+
 const stats = [
-  { value: "100%", label: "multi-hop query accuracy on graph RAG" },
-  { value: "+40%", label: "faithfulness improvement vs. vector-only" },
-  { value: "3", label: "full-stack AI projects built or in flight" },
+  { value: `${projects.length}`, label: "AI & full-stack projects" },
+  { value: `${skillCount}+`, label: "technologies across the stack" },
+  {
+    value: `${certifications.length}`,
+    label: `certifications — ${certifications.map((c) => c.issuer).join(", ")}`,
+  },
 ];
 
 function StatStrip() {
